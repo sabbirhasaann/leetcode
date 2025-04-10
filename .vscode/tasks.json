@@ -9,13 +9,13 @@
                 "-g",
                 "${file}",
                 "-o",
-                "${fileDirname}/a.exe",
+                "a.exe",
                 "&",
-                "${fileDirname}/a.exe",
+                "a.exe",
                 "<",
-                "${fileDirname}/input.txt",
+                "input.txt",
                 ">",
-                "${fileDirname}/output.txt"
+                "output.txt"
             ],
             "group": {
                 "kind": "build",
