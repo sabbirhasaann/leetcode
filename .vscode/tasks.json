@@ -1,0 +1,56 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Customize Build",
+            "type": "cppbuild",
+            "command": "g++",
+            "args": [
+                "-g",
+                "${file}",
+                "-o",
+                "${fileDirname}/a.exe",
+                "&",
+                "${fileDirname}/a.exe",
+                "<",
+                "${fileDirname}/input.txt",
+                ">",
+                "${fileDirname}/output.txt"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": "$gcc",
+            "detail": "Generated task by vscode",
+            "options": {
+                "shell": {
+                    "executable": "cmd.exe"
+                }
+            }
+        },
+        {
+            "label": "Build for Debug",
+            "type": "cppbuild",
+            "command": "g++",
+            "args": [
+                "-g",
+                "${file}",
+                "-o",
+                "${fileDirname}/${fileBasenameNoExtension}.exe",
+                "-std=c++17"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "problemMatcher": "$gcc",
+            "detail": "Generated task by vscode",
+            "options": {
+                "shell": {
+                    "executable": "cmd.exe"
+                }
+            }
+        }
+    ]
+}
