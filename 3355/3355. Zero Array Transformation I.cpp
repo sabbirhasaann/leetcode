@@ -15,6 +15,8 @@ int main()
     cin.tie(0);
     cout.tie(0);
 
-    vector<int> nums;
-    vector<vector<int>> queries;
+    int n, q;
+    cin >> n >> q;
+    vector<int> nums(n);
+    vector<vector<int>> queries();
 }
