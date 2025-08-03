@@ -4,78 +4,40 @@
 using namespace std;
 #define ll long long
 #define endl '\n'
-int getFruitAmount(vector<vector<int>> &fruits, int pos)
-{
-    int low = 0, high = fruits.size() - 1;
-    while (low <= high)
-    {
-        int mid = (low + high) / 2;
-        if (fruits[mid][0] == pos)
-            return fruits[mid][1];
-        else if (fruits[mid][0] < pos)
-            low = mid + 1;
-        else
-            high = mid - 1;
-    }
-    return 0;
-}
 
 int maxTotalFruits(vector<vector<int>> &fruits, int startPos, int k)
 {
+    int n = fruits.size();
     int maxFruits = 0;
+    int windowSum = 0;
 
-    // 1. Walk right only
-    int rightSum = 0;
-    for (int i = startPos; i <= startPos + k; i++)
+    int left = 0;
+
+    for (int right = 0; right < n; ++right)
     {
-        rightSum += getFruitAmount(fruits, i);
-    }
-    maxFruits = max(maxFruits, rightSum);
+        windowSum += fruits[right][1];
 
-    // 2. Walk left only
-    int leftSum = 0;
-    for (int i = startPos; i >= startPos - k; i--)
-    {
-        leftSum += getFruitAmount(fruits, i);
-    }
-    maxFruits = max(maxFruits, leftSum);
-
-    // 3. Left then right (go left L steps, then right R steps)
-    for (int leftSteps = 0; leftSteps <= k; leftSteps++)
-    {
-        int leftPos = startPos - leftSteps;
-        int remaining = k - 2 * leftSteps;
-        if (remaining < 0)
-            continue;
-
-        int rightLimit = startPos + remaining;
-        int total = 0;
-        for (int i = leftPos; i <= rightLimit; i++)
+        while (left <= right)
         {
-            total += getFruitAmount(fruits, i);
-        }
-        maxFruits = max(maxFruits, total);
-    }
+            int l = fruits[left][0];
+            int r = fruits[right][0];
 
-    // 4. Right then left (go right R steps, then left L steps)
-    for (int rightSteps = 0; rightSteps <= k; rightSteps++)
-    {
-        int rightPos = startPos + rightSteps;
-        int remaining = k - 2 * rightSteps;
-        if (remaining < 0)
-            continue;
+            int goLeftFirst = abs(startPos - l) + (r - l);
+            int goRightFirst = abs(startPos - r) + (r - l);
 
-        int leftLimit = startPos - remaining;
-        int total = 0;
-        for (int i = leftLimit; i <= rightPos; i++)
-        {
-            total += getFruitAmount(fruits, i);
+            if (min(goLeftFirst, goRightFirst) <= k)
+                break;
+
+            windowSum -= fruits[left][1];
+            left++;
         }
-        maxFruits = max(maxFruits, total);
+
+        maxFruits = max(maxFruits, windowSum);
     }
 
     return maxFruits;
 }
+
 void soln()
 {
     int n, startPos, k;
