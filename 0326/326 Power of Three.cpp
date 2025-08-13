@@ -12,11 +12,17 @@ bool isPowerOfThree(int n)
         n /= 3;
     return n == 1;
 }
+
+bool isPowerOfThree2(int n)
+{
+    return n > 0 && 1162261467 % n == 0;
+}
 void soln()
 {
     int n;
     cin >> n;
-    cout << isPowerOfThree(n);
+    cout << isPowerOfThree(n) << endl;
+    cout << isPowerOfThree2(n);
 }
 
 int main()
