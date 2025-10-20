@@ -103,7 +103,10 @@ vector<vector<int>> pacificAtlantic(vector<vector<int>> &heights)
 
     while (!q.empty())
     {
-        auto [r, c] = q.front();
+        // auto [r, c] = q.front();
+        pair<int, int> p = q.front();
+        int r = p.first;
+        int c = p.second;
         q.pop();
         for (auto &d : dirs)
         {
@@ -136,7 +139,10 @@ vector<vector<int>> pacificAtlantic(vector<vector<int>> &heights)
 
     while (!q.empty())
     {
-        auto [r, c] = q.front();
+        // auto [r, c] = q.front();
+        pair<int, int> p = q.front();
+        int r = p.first;
+        int c = p.second;
         q.pop();
         for (auto &d : dirs)
         {
