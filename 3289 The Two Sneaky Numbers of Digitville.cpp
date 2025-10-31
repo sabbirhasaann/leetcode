@@ -5,6 +5,19 @@ using namespace std;
 #define ll long long
 #define endl '\n'
 
+vector<int> getSneakyNumbers3(vector<int>& nums) {
+        sort(nums.begin(), nums.end());
+        vector<int> b;
+
+        for (int i = 0; i < nums.size() - 1; i++) {
+            if (nums[i] == nums[i + 1]) {
+                b.push_back(nums[i]);
+            }
+        }
+
+        return b;
+    }
+
 vector<int> getSneakyNumbers2(vector<int> &nums)
 {
     std::vector<int> res(nums.size() - 2);
