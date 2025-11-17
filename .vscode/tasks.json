@@ -6,7 +6,6 @@
             "type": "cppbuild",
             "command": "g++",
             "args": [
-                "-g",
                 "${file}",
                 "-o",
                 "a.exe",
@@ -19,7 +18,7 @@
             ],
             "group": {
                 "kind": "build",
-                "isDefault": true
+                "isDefault": false
             },
             "problemMatcher": "$gcc",
             "detail": "Generated task by vscode",
@@ -30,22 +29,21 @@
             }
         },
         {
-            "label": "Build for Debug",
+            "label": "Build For Debug",
             "type": "cppbuild",
             "command": "g++",
             "args": [
                 "-g",
                 "${file}",
                 "-o",
-                "${fileDirname}/${fileBasenameNoExtension}.exe",
-                // "-std=c++17"
+                "${workspaceFolder}\\a.exe"
             ],
             "group": {
                 "kind": "build",
                 "isDefault": false
             },
             "problemMatcher": "$gcc",
-            "detail": "Generated task by vscode",
+            "detail": "Written by GhostedABC",
             "options": {
                 "shell": {
                     "executable": "cmd.exe"
