@@ -55,8 +55,8 @@ ListNode *addTwoNumbers(ListNode *l1, ListNode *l2)
     int rem = 0;
     while (l1 != nullptr && l2 != nullptr)
     {
-        int summation = (l1->val) + (l2->val);
-        int r = summation % 10 + rem;
+        int summation = (l1->val) + (l2->val) + rem;
+        int r = summation % 10;
         rem = summation / 10;
 
         l1 = l1->next;
@@ -64,6 +64,29 @@ ListNode *addTwoNumbers(ListNode *l1, ListNode *l2)
 
         l = insertAtEnd(l, r);
     }
+
+    while (l1 != nullptr)
+    {
+        int summation = (l1->val) + rem;
+        int r = summation % 10;
+        rem = summation / 10;
+
+        l1 = l1->next;
+        l = insertAtEnd(l, r);
+    }
+
+    while (l2 != nullptr)
+    {
+        int summation = (l2->val) + rem;
+        int r = summation % 10;
+        rem = summation / 10;
+
+        l2 = l2->next;
+        l = insertAtEnd(l, r);
+    }
+
+    if (rem)
+        l = insertAtEnd(l, rem);
 
     return l;
 }
@@ -85,35 +108,56 @@ void soln()
     ListNode *n11 = new ListNode;
     ListNode *n12 = new ListNode;
     ListNode *n13 = new ListNode;
+    ListNode *n14 = new ListNode;
+    ListNode *n15 = new ListNode;
+    ListNode *n16 = new ListNode;
+    ListNode *n17 = new ListNode;
+
     ListNode *n21 = new ListNode;
     ListNode *n22 = new ListNode;
     ListNode *n23 = new ListNode;
+    ListNode *n24 = new ListNode;
 
     l1 = n11;
     l2 = n21;
 
-    n11->val = 2;
+    n11->val = 9;
     n11->next = n12;
 
-    n12->val = 4;
+    n12->val = 9;
     n12->next = n13;
 
-    n13->val = 3;
-    n13->next = nullptr;
+    n13->val = 9;
+    n13->next = n14;
+
+    n14->val = 9;
+    n14->next = n15;
+
+    n15->val = 9;
+    n15->next = n16;
+
+    n16->val = 9;
+    n16->next = n17;
+
+    n17->val = 9;
+    n17->next = nullptr;
 
     traverseLLRec(l1);
     // traverseLL(l1);
 
     l2 = n21;
 
-    n21->val = 5;
+    n21->val = 9;
     n21->next = n22;
 
-    n22->val = 6;
+    n22->val = 9;
     n22->next = n23;
 
-    n23->val = 4;
-    n23->next = nullptr;
+    n23->val = 9;
+    n23->next = n24;
+
+    n24->val = 9;
+    n24->next = nullptr;
 
     // traverseLL(l2);
     traverseLLRec(l2);
