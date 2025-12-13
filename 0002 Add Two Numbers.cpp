@@ -12,6 +12,97 @@ struct ListNode
     ListNode(int x) : val(x), next(nullptr) {}
     ListNode(int x, ListNode *next) : val(x), next(next) {}
 };
+
+ListNode *addTwoNumbers1(ListNode *l1, ListNode *l2)
+{
+    ListNode dummy(0);
+    ListNode *curr = &dummy;
+    int carry = 0;
+
+    while (l1 != nullptr || l2 != nullptr || carry > 0)
+    {
+        if (l1 != nullptr)
+        {
+            carry += l1->val;
+            l1 = l1->next;
+        }
+        if (l2 != nullptr)
+        {
+            carry += l2->val;
+            l2 = l2->next;
+        }
+        curr->next = new ListNode(carry % 10);
+        carry /= 10;
+        curr = curr->next;
+    }
+
+    return dummy.next;
+}
+
+ListNode *addTwoNumbers2(ListNode *l1, ListNode *l2)
+{
+    ListNode *result = new ListNode();
+    ListNode *preNode = result;
+
+    int temp = 0;
+    int addValue;
+    while (l1 != nullptr || l2 != nullptr)
+    {
+        addValue = temp;
+        if (l1 != nullptr)
+        {
+            addValue = addValue + l1->val;
+            l1 = l1->next;
+        }
+
+        if (l2 != nullptr)
+        {
+            addValue = addValue + l2->val;
+            l2 = l2->next;
+        }
+
+        temp = addValue / 10;
+        preNode->next = new ListNode(addValue % 10);
+        preNode = preNode->next;
+    }
+
+    if (temp != 0)
+    {
+        preNode->next = new ListNode(temp);
+    }
+
+    ListNode *head = result;
+    result = result->next;
+    delete head;
+    return result;
+}
+
+ListNode *addTwoNumbers3(ListNode *l1, ListNode *l2)
+{
+    ListNode *p1 = l1;
+    ListNode *p2 = l2;
+    ListNode *dummy = new ListNode(0);
+    ListNode *tail = dummy;
+    int x, y, sum = 0, carry = 0;
+    while (p1 || p2 || carry != 0)
+    {
+        x = (p1) ? p1->val : 0;
+        y = (p2) ? p2->val : 0;
+        sum = x + y + carry;
+        int digit = sum % 10;
+        carry = sum / 10;
+
+        tail->next = new ListNode(digit);
+        tail = tail->next;
+
+        if (p1)
+            p1 = p1->next;
+        if (p2)
+            p2 = p2->next;
+    }
+    return dummy->next;
+}
+
 void traverseLLRec(ListNode *head)
 {
     if (head == nullptr)
