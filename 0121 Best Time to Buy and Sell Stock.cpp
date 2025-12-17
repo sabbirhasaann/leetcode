@@ -4,7 +4,7 @@
 using namespace std;
 #define ll long long
 #define endl '\n'
-int maxProfit(vector<int> &prices)
+int maxProfitNaive(vector<int> &prices)
 {
     int n = prices.size();
     int profit = 0;
@@ -19,6 +19,23 @@ int maxProfit(vector<int> &prices)
         }
     }
     return profit;
+}
+
+int maxProfit(vector<int> &prices)
+{
+    int n = prices.size();
+    int maxProfit = 0;
+
+    vector<int> maxPrices(n, 0);
+
+    maxPrices[n - 1] = prices[n - 1];
+    for (int i = n - 2; i >= 0; i--)
+        maxPrices[i] = max(maxPrices[i + 1], prices[i]);
+
+    for (int i = 0; i < n; i++)
+        maxProfit = max(maxProfit, maxPrices[i] - prices[i]);
+
+    return maxProfit;
 }
 void soln()
 {
