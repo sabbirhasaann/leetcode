@@ -20,6 +20,53 @@ int maxProfitNaive(vector<int> &prices)
     }
     return profit;
 }
+int maxProfit3(vector<int> &prices)
+{
+    int n = prices.size();
+    int mini = prices[0], maxProfit = 0;
+    for (int i = 1; i < n; i++)
+    {
+        if (mini > prices[i])
+            mini = prices[i];
+
+        maxProfit = max(maxProfit, prices[i] - mini);
+    }
+    return maxProfit;
+}
+
+int maxProfit2(vector<int> &prices)
+{
+    if (prices.size() < 2)
+        return 0;
+
+    int minPrice = prices[0];
+    int maxProfit = 0;
+
+    for (int i = 1; i < prices.size(); i++)
+    {
+        if (prices[i] < minPrice)
+            minPrice = prices[i];
+
+        else
+            maxProfit = max(maxProfit, prices[i] - minPrice);
+    }
+
+    return maxProfit;
+}
+
+int maxProfit1(vector<int> &prices)
+{
+    int mini = prices[0];
+    int maxprofit = 0;
+    int n = prices.size();
+    for (int i = 0; i < n; i++)
+    {
+        int cost = prices[i] - mini;
+        maxprofit = max(maxprofit, cost);
+        mini = min(mini, prices[i]);
+    }
+    return maxprofit;
+}
 
 int maxProfit(vector<int> &prices)
 {
