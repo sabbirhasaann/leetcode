@@ -29,6 +29,31 @@ int countNegatives(vector<vector<int>> &grid)
 
     return count;
 }
+int countNegatives1(vector<vector<int>> &grid)
+{
+    int m = grid.size();
+    int n = grid[0].size();
+
+    int row = 0;
+    int col = n - 1;
+    int count = 0;
+
+    // Start from top-right corner
+    while (row < m && col >= 0)
+    {
+        if (grid[row][col] < 0)
+        {
+            // All elements below in this column are also negative
+            count += (m - row);
+            col--; // move left
+        }
+        else
+        {
+            row++; // move down
+        }
+    }
+    return count;
+}
 void soln()
 {
     vector<vector<int>> grid = {
