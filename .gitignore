@@ -1,5 +1,8 @@
 input.txt
 output.txt
 a.exe
+random.cpp
 Random.cpp
 Random.md
+*.exe
+*.out
