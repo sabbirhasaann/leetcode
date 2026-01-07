@@ -1,28 +1,10 @@
-// 2025/12/20 22:35:08
+// 2025/12/22 00:00:55
 
 #include <bits/stdc++.h>
 using namespace std;
 #define ll long long
 #define endl '\n'
 int minDeletionSize(vector<string> &strs)
-{
-    int delCol = 0;
-
-    for (int i = 0; i < strs[0].size(); i++)
-    {
-        for (int j = 0; j < strs.size() - 1; j++)
-        {
-            if (strs[j][i] > strs[j + 1][i])
-            {
-                delCol++;
-                break;
-            }
-        }
-    }
-
-    return delCol;
-}
-int minDeletionSize1(vector<string> &strs)
 {
     int n = strs.size();
     int count = 0;
@@ -31,25 +13,32 @@ int minDeletionSize1(vector<string> &strs)
 
     for (int i = 0; i < k; i++)
     {
+        bool flag = true;
         for (int j = 1; j < n; j++)
         {
             if (strs[j][i] < strs[j - 1][i])
             {
                 count++;
+                flag = false;
                 break;
             }
         }
+        if (flag)
+            break;
     }
     return count;
 }
-
 void soln()
 {
-    vector<string> strs;
-    strs = {"cba", "daf", "ghi"};
+    vector<string> strs = {"ca", "bb", "ac"};
+
+    strs = {"xga", "xfb", "yfa"};
     cout << minDeletionSize(strs) << endl;
 
-    strs = {"a", "b"};
+    strs = {"xc", "yb", "za"};
+    cout << minDeletionSize(strs) << endl;
+
+    strs = {"zyx", "wvu", "tsr"};
     cout << minDeletionSize(strs) << endl;
 }
 
