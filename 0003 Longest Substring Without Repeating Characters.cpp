@@ -5,6 +5,20 @@
 
 using namespace std;
 
+int lengthOfLongestSubstring1(string s) {
+        unordered_map<char, int> freqMap;
+        int left = 0, result = 0;
+        for(int right = 0; right < s.size(); right++){
+            freqMap[s[right]]++;
+            while(freqMap[s[right]] > 1){
+                freqMap[s[left]]--;
+                left++;
+            }
+            result = max(result, right - left + 1);
+        }
+        return result;
+    }
+
 int lengthOfLongestSubstring(string s){
 
     unordered_map<char, int> lastSeen;
