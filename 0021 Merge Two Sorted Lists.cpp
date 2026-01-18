@@ -12,7 +12,90 @@ struct ListNode {
     ListNode(int x) : val(x), next(nullptr) {}
     ListNode(int x, ListNode *next) : val(x), next(next) {}
 };
+
+
+ListNode* mergeTwoLists2(ListNode* list1, ListNode* list2) 
+{
+    struct ListNode dummy;
+    dummy.val = -1;
+    dummy.next = NULL;
+    struct ListNode* preHead = &dummy;
+
+    while(list1 != NULL && list2 != NULL) {
+            if (list1->val < list2->val) {
+                    preHead->next = list1;
+                    list1 = list1->next;
+            } else {
+                    preHead->next = list2;
+                    list2 = list2->next;
+            }
+            preHead = preHead->next;
+    }
+    if (list1 != NULL) {
+            preHead->next = list1;
+    }
+    if (list2 != NULL) {
+            preHead->next = list2;
+    }
+    return dummy.next;
+    
+}
+
+
+ListNode* insertAtEnd(ListNode* root, int value) {
+    ListNode* temp = new ListNode(value);
+    if (root == NULL)
+        return temp;
+    ListNode* last = root;
+    while (last->next != NULL) {
+        last = last->next;
+    }
+    last->next = temp;
+    return root;
+}
  
+
+ListNode* mergeTwoLists1(ListNode* list1, ListNode* list2) {
+    ListNode* res = NULL;
+    if (list1 == NULL && list2 == NULL)
+        return res;
+    if (list1 == NULL)
+        return list2;
+    if (list2 == NULL)
+        return list1;
+
+    ListNode* temp1 = list1;
+    ListNode* temp2 = list2;
+    vector<int> v;
+    while (temp1 != NULL || temp2 != NULL) {
+        /*if (temp1->val == temp2->val) {
+            v.push_back(temp1->val);
+            v.push_back(temp2->val);
+            if (temp1 != NULL)
+                temp1 = temp1->next;
+            if (temp2 != NULL)
+                temp2 = temp2->next;
+        }*/ 
+        int x = (temp1 != NULL) ? temp1->val : INT_MAX;
+        int y = (temp2 != NULL) ? temp2->val : INT_MAX;
+
+        if (x > y) {
+            v.push_back(y);
+            if (temp2 != NULL)
+                temp2 = temp2->next;
+        } else {
+            v.push_back(x);
+            if (temp1 != NULL)
+                temp1 = temp1->next;
+        }
+    }
+
+    for (auto i : v) {
+        //cout<<i<<" ";
+        res = insertAtEnd(res, i);
+    }
+    return res;
+}
 
 ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
     ListNode* res = new ListNode();
