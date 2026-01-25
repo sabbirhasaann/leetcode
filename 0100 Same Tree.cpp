@@ -34,6 +34,12 @@ bool isSameTree(TreeNode* p, TreeNode* q) {
     return leftT & rightT;
 }
 
+bool isSameTree(TreeNode* p, TreeNode* q) {
+    if (p == NULL || q == NULL) return p == q;
+    if (p->val != q->val) return false;
+    return isSameTree(p->left, q->left) && isSameTree(p->right, q->right);
+}
+
 void soln()
 {
     TreeNode *p, *p11, *p12, *q, *q11, *q12;
