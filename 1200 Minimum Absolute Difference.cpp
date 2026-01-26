@@ -38,6 +38,26 @@ void printMatrix(vector<vector<int>> res){
 
 }
 
+vector<vector<int>> minimumAbsDifference(vector<int>& arr) {
+    //o/(n)+o(nlogn)
+    vector<vector<int>>res;
+    int mindiff=abs(arr[0]-arr[1]);
+    
+    sort(arr.begin(),arr.end());
+    for(int i=0;i<arr.size()-1;i++){
+        int currdiff=abs(arr[i]-arr[i+1]);
+        if(currdiff<mindiff) {         
+            mindiff=currdiff;
+            res.clear();
+            res.push_back({arr[i],arr[i+1]});
+        }
+        else if(currdiff==mindiff){    
+            res.push_back({arr[i],arr[i+1]});
+        }
+    }
+    return res;
+}
+
 void soln()
 {
     vector<int> arr = {4,2,1,3};
