@@ -45,6 +45,36 @@ int maxAreaOfIsland(vector<vector<int>>& grid) {
     return maxArea;
 }
 
+
+
+int solve(int i , int j , vector<vector<int>>&grid){
+
+    if(i < 0 || j < 0 || i >= grid.size() || j >= grid[0].size() || grid[i][j] == 0) return 0 ;
+
+    int sum = 1;
+    grid[i][j] = 0 ;
+    sum += solve(i-1 , j , grid);
+    sum += solve(i+1 , j , grid);
+    sum += solve(i , j -1 , grid);
+    sum += solve(i , j +1 , grid);
+
+    return sum ; 
+
+}
+int maxAreaOfIsland1(vector<vector<int>>& grid) {
+
+    int ans = 0 ;
+    for(int i = 0 ;i < grid.size() ; i++){
+        for(int j = 0 ; j < grid[0].size() ; j++){
+
+            if(grid[i][j] == 1)  ans = max(ans , solve(i , j , grid));
+        }
+    }
+
+    return ans ;
+    
+}
+
 void soln()
 {
     vector<vector<int>> grid = {
