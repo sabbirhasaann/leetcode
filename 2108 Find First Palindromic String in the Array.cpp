@@ -22,6 +22,28 @@ string firstPalindrome(vector<string>& words) {
     return "";
 }
 
+string firstPalindrome1(vector<string>& words) {
+    string str = "";
+    int n = words.size();
+    for(int i = 0;i < n;i++){
+        string s = words[i];
+        int l = 0,r = s.length()-1;
+        bool yes = true;
+        while(l < r){
+            if(s[l] != s[r]){
+                yes = false;
+                break;
+            }
+            l++,r--;
+        }
+        if(yes == true){
+            str = s;
+            break;
+        }
+    } 
+    return str;
+}
+
 void soln()
 {
     vector<string> words = {"abc","car","ada","racecar","cool"};
