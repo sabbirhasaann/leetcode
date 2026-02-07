@@ -20,6 +20,20 @@ char repeatedCharacter(string s) {
     return ch;
 }
 
+char repeatedCharacter(string s) {
+        
+    vector<int> freq(26,0);
+    for(char ch:s){
+        if(freq[ch-'a']==1){
+            return ch;
+        }
+        freq[ch-'a']++;
+        
+    }
+    return '\0';
+}
+
+
 void soln()
 {
     string s = "abccbaacz";
