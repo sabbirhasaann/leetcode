@@ -13,6 +13,22 @@ bool checkString(string s) {
     return true;
 }
 
+bool checkString2(string s) {
+    for(int i=1;i<s.size();i++){
+        if(s[i-1]>s[i]){
+            return false;
+        }
+    }
+    return true;
+    
+}
+
+bool checkString1(string s) {
+    return s.find("ba")==string::npos;
+}
+
+
+
 void soln()
 {
     string s = "aaabbb";
