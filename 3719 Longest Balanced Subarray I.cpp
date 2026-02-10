@@ -58,6 +58,58 @@ int longestBalanced(vector<int>& nums) {
     return maxLen;
 }
 
+int longestBalanced1(vector<int>& a) {
+    int n=a.size();
+    int maxi=0;
+    for(int i=0;i<n;i++){
+        vector<bool>seen(100005,false);
+        int even=0;
+        int odd=0;
+        for(int j=i;j<n;j++){
+            if(seen[a[j]]==false){
+                seen[a[j]]=true;
+                if(a[j]%2==0) even++;
+                else odd++;
+            }
+            if(even==odd) maxi=max(maxi,j-i+1);
+        }
+    }
+    return maxi;
+}
+
+
+int longestBalanced(vector<int>& a) {
+    unordered_map<int, int> even, odd;
+    int max_ans = 0;
+    int n = a.size() ;
+    for (int i = 0; i < n - 1; i++) {
+        even.clear();
+        odd.clear();
+        if (a[i] % 2 == 0) {
+            even[a[i]] = 1;
+        } else {
+            odd[a[i]] = 1;
+        }
+
+        for (int j = i + 1; j < n; j++) {
+
+            if (a[j] % 2 == 0) {
+                even[a[j]] = 1;
+            } 
+            else {
+                odd[a[j]] = 1;
+            }
+
+            if(even.size() == odd.size()){
+                max_ans = max(max_ans , j - i + 1) ;
+
+            }
+        }
+
+    }
+    return max_ans ;
+
+}
 
 void soln()
 {
