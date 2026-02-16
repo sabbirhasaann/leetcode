@@ -18,6 +18,34 @@ int reverseBits(int n){
     return rev;
 }
 
+int convert_back(vector<int>bits){
+    int num=bits[31];
+    for(int i=0;i<31;i++){
+        num=num+bits[i]*pow(2,31-i);
+    }
+    return num;
+}
+int reverseBits1(int n) {
+    vector<int>bits(32,0);
+    int num=n,i=0;
+    while(num!=0){
+        int rem=num%2;
+        bits[i]=rem;
+        num=num/2;
+        i++;
+    }
+    return convert_back(bits);
+}
+
+uint32_t reverseBits2(uint32_t n) {
+    uint32_t result = 0;
+    for (int i = 0; i < 32; i++) {
+        int bit = n & 1;       // Extract the least significant bit
+        result = (result << 1) | bit; // Append the bit to the result
+        n = n >> 1;           // Right-shift n to process the next bit
+    }
+    return result;
+}
 int reverseBitsNaive(int n) {
 
     int rev = 0;
