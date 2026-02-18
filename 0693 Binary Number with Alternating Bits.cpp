@@ -25,7 +25,7 @@ bool hasAlternatingBits(int n) {
     }
 
 
-bool hasAlternatingBits(int n) {
+bool hasAlternatingBits1(int n) {
     int l=log2(n);
     // cout<<l<<endl;
     l++;
@@ -37,6 +37,46 @@ bool hasAlternatingBits(int n) {
     }
     return true;
 }
+
+bool hasAlternatingBits2(int n) {
+    unsigned int x = (n ^ (n >> 1));
+    return (x & (x + 1u)) == 0;
+}
+
+bool hasAlternatingBits3(int n) {
+    int rem=0;
+    while(n>0){
+        rem=n%2;
+        n/=2;
+        if(n%2 == rem)
+            return false;
+    }
+    return true;
+}
+bool hasAlternatingBits4(int n) {
+    int cur;
+    
+    while (n > 0) {
+        cur = n%2;
+        n /= 2;
+        if (cur == n % 2) {
+            return false;
+        }
+        
+        cout << cur;
+    }
+    return true;
+}
+
+bool hasAlternatingBits5(int n) {
+    string x = bitset<32>(n).to_string();
+    int start = x.find('1');
+    for(int i=start;i<x.size();i++){
+        if(x[i] == x[i+1])return false;
+    }
+    return true;
+}
+
 void soln()
 {
     auto start = high_resolution_clock::now();
