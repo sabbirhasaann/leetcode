@@ -23,6 +23,20 @@ bool hasAlternatingBits(int n) {
         }
         return true;
     }
+
+
+bool hasAlternatingBits(int n) {
+    int l=log2(n);
+    // cout<<l<<endl;
+    l++;
+    int prev=(n>>l)&1;
+    for(int i=l-1;i>=0;i--){
+        int bit=(n>>i)&1;
+        if(prev==bit) return false;
+        prev=bit;
+    }
+    return true;
+}
 void soln()
 {
     auto start = high_resolution_clock::now();
@@ -53,6 +67,8 @@ void soln()
     cout << "Time taken: " << duration.count() << " ms" << endl;
 
 }
+
+
 
 
 int main(){
