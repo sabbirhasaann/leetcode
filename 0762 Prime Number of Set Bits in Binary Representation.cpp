@@ -1,6 +1,8 @@
 // 2026/02/21 14:10:00
 // https://leetcode.com/problems/prime-number-of-set-bits-in-binary-representation/
 
+// check the number of set bits are 2, 3, 5, 7, 11, 13, 17 or 19.
+
 #include <bits/stdc++.h>
 using namespace std;
 using namespace std::chrono;
