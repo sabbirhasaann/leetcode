@@ -35,6 +35,89 @@ int countPrimeSetBits(int left, int right) {
     return cnt;
 }
 
+// last 
+bool func(string s)
+{
+    int cnt=0;
+    int c=0;
+    for(auto it:s)
+    {
+        if(it=='1')
+        {
+            c++;
+        }
+    }
+    for(int i=1;i<=c;i++)
+    {
+        if(c%i==0) cnt++;
+    }
+    if(cnt==2) return true;
+    return false;
+}
+int countPrimeSetBits1(int left, int right) {
+    int count=0;
+    for(int i=left;i<=right;i++)
+    {
+        string bin="";
+        int n=i;
+        while(n>0)
+        {
+            bin+=(n%2)+'0';
+            n/=2;
+        }
+        if(func(bin))
+        {
+            count++;
+        }
+    }
+    return count;
+}
+
+bool isPrime(int bit  ){
+    if(bit  < 2 )
+         return false ;
+    for (int j = 2 ; j < bit  ; j++){
+        if(bit  % j == 0)
+        return false ;
+    }
+    return true ;
+}
+int countPrimeSetBits2(int left, int right) {
+    int count =  0 ;
+    for(int i = left ; i <= right ;  i++){
+    int temp  = i ;
+        int bit = 0 ;
+        while(temp != 0 ){
+        bit += (temp & 1) ;
+        temp >>= 1;
+        }
+        if (isPrime(bit)){
+        count ++ ;
+        }
+    }
+    return count ;
+}
+
+bool isPrime1(int n){
+    if(n==1){
+        return false;
+    }
+    for(int i = 2;i<=sqrt(n);i++){
+        if(n%i==0){
+            return false;
+        }
+    }
+    return true;
+}
+int countPrimeSetBits3(int left, int right) {
+    int ans = 0;
+    for(int i = left;i<=right;i++){
+        if(isPrime1(__builtin_popcount(i))){
+            ans++;
+        }
+    }
+    return ans;
+}
 
 void soln()
 {
@@ -53,6 +136,7 @@ void soln()
         cout << "Time taken: " << duration.count() << " ms" << endl;
     }
 }
+
 
 
 int main(){
