@@ -28,6 +28,38 @@ bool hasAllCodes(string s, int k) {
         return true;
     }
 
+
+bool hasAllCodes1(string s, int k) {
+    int n = s.length();
+    int target = 1 << k;
+    int mask = target - 1;
+    vector <bool> check (target, false);
+    int cnt = 0;
+    int curr_num = 0;
+    
+    for (int i = 0; i < n; i++) {
+        curr_num = (curr_num << 1 & mask) | (s[i] - '0');
+        
+        if (i >= k - 1) {
+            if (!check[curr_num]) {
+            check[curr_num] = true;
+            cnt++;
+            }
+        }
+    }
+    return cnt == target;
+}
+
+bool hasAllCodes2(string s, int k) {
+    if (s.size() < k) return false; // can't have substrings longer than s
+    
+    unordered_set<string> st;
+    for(int i = 0; i <= s.size() - k; i++) {
+        st.insert(s.substr(i, k));
+    }
+    return st.size() == (1 << k);
+}
+
 void soln()
 {
     vector<pair<string, int>> testSet{
