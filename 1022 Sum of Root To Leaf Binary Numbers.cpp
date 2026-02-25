@@ -16,7 +16,7 @@ void printArray(vector<int> &v)
 
 vector<int> sortByBits(vector<int>& arr) {
         
-        sort(arr.begin(), arr.end(), [](const int &a, const int &b){
+        sort(arr.begin(), arr.end(), [](int a, int b){ // don't use const and reference small types
             int aSetBits = __builtin_popcount(a);
             int bSetBits = __builtin_popcount(b);
 
