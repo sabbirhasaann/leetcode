@@ -17,7 +17,19 @@ int climbStairs(int n) {
             dp[i] = dp[i-2] + dp[i-1];
         return dp[n-1];
     }
+int climbStairs1(int n) {
 
+        int steps = 0;
+        int minus_1 = 1;
+        int minus_2 = 0;
+        for(int i = 1; i <= n; i++){
+            steps =  minus_1 + minus_2;
+
+            minus_2 = minus_1;
+            minus_1 = steps;
+        }
+        return steps;
+    }
 void soln()
 {
     vector<int> testSet{
