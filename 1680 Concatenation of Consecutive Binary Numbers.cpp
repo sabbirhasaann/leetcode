@@ -67,6 +67,15 @@ int concatenatedBinary4(int n) {
     return result;
 }
 
+int concatenatedBinary5(int n) {
+        long ans = 0, mod = 1e9+7, length = 0;
+        for (int i  = 1; i<= n; ++i){
+            if ((i & (i - 1)) == 0) length++;
+            ans = ((ans << length) + i) % mod;
+        }
+        return ans;
+    }
+
 void soln()
 {
     vector<int> testSet{
