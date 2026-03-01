@@ -4,6 +4,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 using namespace std::chrono;
+using namespace std::ranges;
 #define ll long long
 #define endl '\n'
 
@@ -16,7 +17,19 @@ int minPartitions(string n) {
         }
         return maxDigit;
     }
+int minPartitions1(string n) {
+        return ranges::max(n) - '0';        
+    }
 
+int minPartitions2(string n) {
+        int maxi=0;
+        for(char c : n){
+            if(maxi<c-'0'){
+                maxi=c-'0';
+            }
+        }
+        return maxi;
+    }
 void soln()
 {
     vector<string> testSet{
