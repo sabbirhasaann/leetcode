@@ -141,6 +141,50 @@ int numSpecial4(vector<vector<int>>& mat) {
         }
         return total;
     }
+
+    int numSpecial5(vector<vector<int>>& input) {
+        		int ans=0,i,j,m=input.size(),n=input[0].size(),c,r;
+          bool flagR=true;
+          bool flagC=true;
+          for(i=0;i<m;++i) {
+               for(j=0;j<n;++j) {
+                    if(input[i][j]) {
+                         //check all the cols for this row
+                         c=0,r=i;
+                         flagR=true;
+                         flagC=true;
+                         while(c<n) {
+                              if(c==j) {
+                                   ++c;
+                                   continue;
+                              }
+                              if(input[r][c]==1) {
+                                   flagR=false;
+                                   break;
+                              }
+                              ++c;
+                         }
+                         //check all the row for this col
+                         c=j,r=0;
+                         while(r<m) {
+                              if(r==i) {
+                                   ++r;
+                                   continue;
+                              }
+                              if(input[r][c]==1) {
+                                   flagC=false;
+                                   break;
+                              }
+                              ++r;
+                         }
+                         if(flagR && flagC) {
+                              ans++;
+                         }
+                    }   
+               }
+          }
+          return ans;
+    }
 void soln()
 {
     vector<vector<vector<int>>> testSet{
