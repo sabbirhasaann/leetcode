@@ -47,13 +47,66 @@ string generateRandomBinaryString(size_t length) {
 
 
 
+#include <iostream>
+#include <vector>
+#include <random>
+#include <ctime>
+
+using namespace std;
+
+/**
+ * Generates an m x n binary matrix.
+ * @param rows Number of rows
+ * @param cols Number of columns
+ * @param density A value between 0 and 100 (percentage of 1s)
+ */
+vector<vector<int>> generateMatrix(int rows, int cols, int density) {
+    vector<vector<int>> mat(rows, vector<int>(cols, 0));
+    
+    // Use a random device and mt19937 for better randomness than rand()
+    random_device rd;
+    mt19937 gen(rd());
+    uniform_int_distribution<> dis(1, 100);
+
+    for (int i = 0; i < rows; ++i) {
+        for (int j = 0; j < cols; ++j) {
+            if (dis(gen) <= density) {
+                mat[i][j] = 1;
+            }
+        }
+    }
+    return mat;
+}
+
+void printMatrix(const vector<vector<int>>& mat) {
+    cout << "{" << endl;
+    for (int i = 0; i < mat.size(); ++i) {
+        cout << "  {";
+        for (int j = 0; j < mat[i].size(); ++j) {
+            cout << mat[i][j] << (j == mat[i].size() - 1 ? "" : ",");
+        }
+        cout << "}" << (i == mat.size() - 1 ? "" : ",") << endl;
+    }
+    cout << "}" << endl;
+}
+
+
+
+
 int main()
 {
-    string alphabet = "abcdefghijklmnopqrstuvwxyz";
-    integerGenerator(10000);
+    // string alphabet = "abcdefghijklmnopqrstuvwxyz";
+    // integerGenerator(10000);
 
     // cout << generate_random_string(1000, alphabet) << endl;
-    // cout << generateRandomBinaryString(100000); 
+    // cout << generateRandomBinaryString(500000); 
+
+    int m = 5, n = 5;
+    int density = 15; // 15% chance for any cell to be 1
+
+    cout << "Generated Matrix (" << m << "x" << n << "):" << endl;
+    vector<vector<int>> myMat = generateMatrix(m, n, density);
+    printMatrix(myMat);
 
 
     return 0;
