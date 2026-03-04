@@ -33,6 +33,114 @@ int numSpecial(vector<vector<int>>& mat) {
         
     }
 
+ int numSpecial1(vector<vector<int>>& mat) {
+        int m = mat.size();
+        int n = mat[0].size();
+        
+        vector<int> rowSum(m, 0);
+        vector<int> colSum(n, 0);
+        
+        // Count row and column sums
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (mat[i][j] == 1) {
+                    rowSum[i]++;
+                    colSum[j]++;
+                }
+            }
+        }
+        
+        int count = 0;
+        
+        // Check special positions
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (mat[i][j] == 1 && rowSum[i] == 1 && colSum[j] == 1) {
+                    count++;
+                }
+            }
+        }
+        
+        return count;
+    }
+
+int numSpecial2(vector<vector<int>>& mat) {
+    int m = mat.size(), n = mat[0].size();
+    vector<int> row(m,0), col(n,0);
+
+    for(int i=0;i<m;i++)
+        for(int j=0;j<n;j++)
+            if(mat[i][j]==1){
+                row[i]++;
+                col[j]++;
+            }
+
+    int count = 0;
+    for(int i=0;i<m;i++)
+        for(int j=0;j<n;j++)
+            if(mat[i][j]==1 && row[i]==1 && col[j]==1)
+                count++;
+
+    return count;
+}
+
+int numSpecial3(std::vector<std::vector<int>>& mat)
+	{
+		int rows = mat.size();
+		int cols = mat[0].size();
+
+		std::vector<int> rowSum(rows, 0);
+		std::vector<int> colSum(cols, 0);
+
+		for (int i = 0; i < rows; ++i)
+		{
+			for (int j = 0; j < cols; ++j)
+			{
+				if (mat[i][j] == 1)
+				{
+					rowSum[i]++;
+					colSum[j]++;
+				}
+			}
+		}
+
+		int count = 0;
+		for (int i = 0; i < rows; i++)
+		{
+			for (int j = 0; j < cols; ++j)
+			{
+				if (mat[i][j] == 1 && rowSum[i] == 1 && colSum[j] == 1)
+					count++;
+			}
+		}
+		return count;
+	}
+int numSpecial4(vector<vector<int>>& mat) {
+        int m = mat.size();
+        int n = mat[0].size();
+        vector<int> rowCount(m+1, 0);
+        vector<int> colCount(n+1, 0);
+        // pre compute the count of 1
+        for(int i = 0; i < m; i++){
+            for(int j = 0; j < n; j++){
+                if(mat[i][j] == 1){
+                    rowCount[i] +=1;
+                    colCount[j] +=1;
+                }
+            }
+        }
+        // now traversing once again
+        int total = 0;
+        for(int row = 0; row < m; row++){
+            for(int col = 0; col < n; col++){
+                if(mat[row][col] == 1 && rowCount[row] <= 1 && colCount[col] <= 1){
+                    total++;
+                    
+                }
+            }
+        }
+        return total;
+    }
 void soln()
 {
     vector<vector<vector<int>>> testSet{
