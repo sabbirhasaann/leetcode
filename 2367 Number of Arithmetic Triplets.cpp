@@ -19,6 +19,43 @@ int arithmeticTriplets(vector<int>& nums, int diff) {
         
     }
 
+int arithmeticTriplets1(vector<int>& nums, int diff) {
+        int n = nums.size();
+        int cnt=0;
+        for(int i=0;i<n;i++){
+            for(int j=i+1;j<n;j++){
+                for(int k=j+1;k<n;k++){
+                    if((nums[j]-nums[i]== diff)&& (nums[k]-nums[j]==diff)) cnt++;
+                }
+            }
+        }
+        return cnt;
+    }
+
+int arithmeticTriplets2(vector<int>& nums, int diff) {
+    int  arr[201]   ={0};
+    for(auto it:nums){
+        arr[it]++;
+    }
+    int ans=0;
+    for(auto it:nums){
+        if(it-diff>=0 &&it+diff<=200    &&arr[it-diff]&&arr[it+diff]){
+            ans++;
+        }
+    }
+    return  ans;
+}
+
+int arithmeticTriplets3(vector<int>& nums, int diff) {
+    unordered_set s(nums.begin(),nums.end());
+    int count=0;
+    for(int x:nums){
+        if(s.count(x-diff) && s.count(x+diff)){
+            count++;
+        }
+    }
+    return count;     
+}
 void soln()
 {
     vector<pair<vector<int>, int>> testSet{
@@ -36,6 +73,25 @@ void soln()
     }
 }
 
+
+int arithmeticTriplets4(vector<int>& nums, int diff) {
+    set <int> s(nums.begin(),nums.end());
+    int length=size(s);
+    int count=0;
+    for(int i=0;i<length;i++){
+        int j=diff+nums[i];
+        if(s.count(j)==1){
+            int k=diff+j;
+            if(s.count(k)==1){
+                count++;
+            }
+        }
+        else{
+            continue;
+        }
+    }
+    return count;
+}
 
 int main(){
     ios_base::sync_with_stdio(false);
