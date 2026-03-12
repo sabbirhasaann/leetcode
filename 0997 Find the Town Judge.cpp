@@ -39,6 +39,36 @@ void soln()
 }
 
 
+int findJudge1(int n, vector<vector<int>>& trust) {
+         vector<int> count(n + 1, 0);
+        for (auto& t : trust)
+            count[t[0]]--, count[t[1]]++;
+
+        for (int i = 1; i <= n; ++i) {
+            if (count[i] == n - 1) return i;
+        }
+
+        return -1;
+    }
+
+int findJudge2(int n, vector<vector<int>>& trust) 
+    {
+        vector<int> nodes(n+1,n-1),visited(n+1,0);
+        for(int i=0;i<trust.size();++i)
+        {
+            nodes[trust[i][0]]++;
+            nodes[trust[i][1]]--;
+        }
+        for(int i=1;i<=n;++i)
+        {
+            if(nodes[i]==0)
+            {
+                return i;
+            };
+        }
+        return -1;
+    }
+
 int main(){
     ios_base::sync_with_stdio(false);
 
