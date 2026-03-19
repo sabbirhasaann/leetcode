@@ -38,6 +38,43 @@ void soln()
     }
 }
 
+bool containsNearbyDuplicate1(vector<int>& nums, int k) {
+        unordered_map<int,int>m;
+        for(int i=0;i<nums.size();i++)
+        {
+            if(m.count(nums[i]))
+            {
+                if(i-m[nums[i]]<=k)
+                return true;
+            }
+            m[nums[i]]=i;
+        }
+        return false;
+    }
+
+
+bool containsNearbyDuplicate2(vector<int>& nums, int k) {
+        unordered_map<int, int> m;
+        m.reserve(nums.size());
+        for (int i = 0; i < nums.size(); i++) {
+            auto it = m.find(nums[i]);
+            if (it != m.end()) {
+                if (abs(it->second-i) <= k) return true;
+            }
+            m[nums[i]] = i;
+        }
+        return false;
+    }
+
+bool containsNearbyDuplicate3(vector<int>& nums, int k) {
+        unordered_set<int>window;
+        for(int i=0;i<nums.size();i++){
+            if(window.count(nums[i])) return true;
+            window.insert(nums[i]);
+            if(window.size()>k) window.erase(nums[i-k]);
+        }
+        return false;
+    }
 
 int main(){
     ios_base::sync_with_stdio(false);
