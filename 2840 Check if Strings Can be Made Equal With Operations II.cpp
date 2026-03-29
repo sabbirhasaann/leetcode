@@ -29,6 +29,130 @@ bool checkStrings(string s1, string s2) {
         return true;
     }
 
+bool checkStrings1(string s1, string s2) {
+    if (s1.length() != s2.length()) {
+        return false;
+    }
+
+    int counts[256] = {0};
+
+    for (int i = 0; i < s1.length(); i++) {
+        int offset = (i & 1) << 7;
+        counts[offset + s1[i]]++;
+        counts[offset + s2[i]]--;
+    }
+
+    for (int i = 0; i < 256; i++) {
+        if (counts[i] != 0) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+bool checkStrings2(string s1, string s2) {
+    vector<int> odd(26);
+    vector<int> even(26);
+    for(int i=0; i<s1.size(); i++){
+        if(i&1){
+            odd[s1[i]-'a']++;
+        }
+        else{
+            even[s1[i]-'a']++;
+        }
+    }
+    for(int i=0; i<s2.size(); i++){
+        if(i&1){
+            odd[s2[i]-'a']--;
+        }
+        else{
+            even[s2[i]-'a']--;
+        }
+    }
+    for(const int &i: odd){
+        if(i!=0) return false;
+    }
+    for(const int &i: even){
+        if(i!=0) return false;
+    }
+    return true;
+}
+
+bool checkStrings3(string s1, string s2) {
+    if (s1.length() != s2.length()) {
+        return false;
+    }
+
+    int counts[256] = {0};
+
+    for (int i = 0; i < s1.length(); i++) {
+        int offset = (i & 1) << 7;
+        counts[offset + s1[i]]++;
+        counts[offset + s2[i]]--;
+    }
+
+    for (int i = 0; i < 256; i++) {
+        if (counts[i] != 0) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+bool checkStrings4(string s1, string s2) {
+    std::vector<int> odds(26);
+    std::vector<int> evens(26);
+    bool even = true;
+    for (int i = 0; i < s1.size(); i++) {
+        even = !even;
+        if (even) {
+            evens[s1[i] - 'a']++;
+            evens[s2[i] - 'a']--;
+        } else {
+            odds[s1[i] - 'a']++;
+            odds[s2[i] - 'a']--;
+        }
+    }
+    for (int i = 0; i < odds.size(); i++) {
+        if (odds[i] != 0 || evens[i] != 0) {
+            return false;
+        }
+    }
+    return true;
+}
+
+bool checkStrings5(string s1, string s2) {
+    bool ans=false;
+    int earr1[26]={0};
+    int oarr1[26]={0};
+    int earr2[26]={0};
+    int oarr2[26]={0};
+    int n=s1.length();
+    for(int i=0;i<n;i++)
+    {
+        if(i%2==0)
+        {
+            earr1[s1[i]-'a']++;
+            earr2[s2[i]-'a']++;
+        }
+        else
+        {
+            oarr1[s1[i]-'a']++;
+            oarr2[s2[i]-'a']++;
+        }
+    }
+    for(int i=0;i<26;i++)
+    {
+        if(earr1[i] != earr2[i] || oarr1[i] != oarr2[i])
+        {
+            return false;
+        }
+    }
+    return true;
+}
+
 void soln()
 {
     vector<pair<string,string>> testSet{
