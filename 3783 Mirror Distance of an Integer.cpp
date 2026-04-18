@@ -24,6 +24,14 @@ int mirrorDistance(int n) {
         return abs(rn-n);
     }
 
+
+int mirrorDistance(int n) {
+        string s = to_string(n);
+        reverse(s.begin(),s.end());
+        int x = stoi(s);
+        return (abs(x-n));
+    }
+    
 void soln()
 {
     vector<int> testSet{
