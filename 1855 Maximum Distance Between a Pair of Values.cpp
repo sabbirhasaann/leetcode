@@ -51,6 +51,62 @@ int maxDistance1(vector<int>& nums1, vector<int>& nums2) {
         return maxD;
     }
 
+int maxDistance2(vector<int>& nums1, vector<int>& nums2) {
+    int i = 0;
+    int j = 1;
+    int dis = 0;
+    while(i < nums1.size() && j < nums2.size()){
+        int t1 = nums1[i];
+        int t2 = nums2[j];
+        if( i<=j && t1 <= t2 ){
+            dis = max(dis,j-i);
+            j++;
+        }
+        else{
+            i++;
+            j++;
+        }
+    }
+    return dis;
+}
+
+int maxDistance3(vector<int>& nums1, vector<int>& nums2) {
+        int i = 0, j = 0;
+
+        int max_val = 0;
+
+        while(i < nums1.size() && j < nums2.size()){
+            if(nums1[i] <= nums2[j]){
+                j++;
+            }
+
+            else{
+                max_val = max(max_val, j - 1 - i);
+                i++;
+            }
+        }
+
+        return max(max_val, j-1-i);
+    }
+
+
+    int maxDistance4(vector<int>& nums1, vector<int>& nums2) {
+        int i = 0, j = 0;
+        int n = nums1.size(), m = nums2.size();
+        int ans = 0;
+
+        while (i < n && j < m) {
+            if (nums1[i] <= nums2[j]) {
+                ans = max(ans, j - i);
+                j++;
+            } else {
+                i++;
+                if (i > j) j = i;
+            }
+        }
+
+        return ans;
+    }
 void soln()
 {
     vector<pair<vector<int>, vector<int>>> testSet{
