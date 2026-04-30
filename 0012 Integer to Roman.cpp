@@ -83,6 +83,60 @@ string intToRoman(int num)
     return r;
 }
 
+string intToRoman1(int num)
+{
+    vector<int> values = {
+        1000, 900, 500, 400,
+        100, 90, 50, 40,
+        10, 9, 5, 4, 1};
+
+    vector<string> symbols = {
+        "M", "CM", "D", "CD",
+        "C", "XC", "L", "XL",
+        "X", "IX", "V", "IV", "I"};
+
+    string result = "";
+
+    for (int i = 0; i < values.size(); i++)
+    {
+        while (num >= values[i])
+        {
+            num -= values[i];
+            result += symbols[i];
+        }
+    }
+
+    return result;
+}
+
+string intToRoman2(int num)
+{
+    string ones[] = {"", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"};
+    string tens[] = {"", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC"};
+    string hundreds[] = {"", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM"};
+    string thousands[] = {"", "M", "MM", "MMM"};
+
+    string Roman = thousands[num / 1000] + hundreds[(num % 1000) / 100] + tens[(num % 100) / 10] + ones[num % 10];
+    return Roman;
+}
+
+string intToRoman3(int num)
+{
+    string Roman = "";
+
+    vector<pair<int, string>> storeIntRoman = {{1000, "M"}, {900, "CM"}, {500, "D"}, {400, "CD"}, {100, "C"}, {90, "XC"}, {50, "L"}, {40, "XL"}, {10, "X"}, {9, "IX"}, {5, "V"}, {4, "IV"}, {1, "I"}};
+
+    for (int i = 0; i < storeIntRoman.size(); i++)
+    {
+        while (num >= storeIntRoman[i].first)
+        {
+            Roman += storeIntRoman[i].second;
+            num -= storeIntRoman[i].first;
+        }
+    }
+    return Roman;
+}
+
 void soln()
 {
     vector<int> testSet{
@@ -100,6 +154,44 @@ void soln()
         auto duration = duration_cast<milliseconds>(stop - start);
         cout << "Time taken: " << duration.count() << " ms" << endl;
     }
+}
+
+string intToRoman4(int num)
+{
+    string ans = "";
+    vector<pair<int, string>> table = {
+        {1000, "M"}, {900, "CM"}, {500, "D"}, {400, "CD"}, {100, "C"}, {90, "XC"}, {50, "L"}, {40, "XL"}, {10, "X"}, {9, "IX"}, {5, "V"}, {4, "IV"}, {1, "I"}};
+    for (auto [val, cha] : table)
+    {
+        while (num >= val)
+        {
+            ans += cha;
+            num -= val;
+        }
+    }
+    return ans;
+}
+
+string intToRoman5(int num)
+{
+    const vector<pair<int, string>> valueSymbols{
+        {1000, "M"}, {900, "CM"}, {500, "D"}, {400, "CD"}, {100, "C"}, {90, "XC"}, {50, "L"}, {40, "XL"}, {10, "X"}, {9, "IX"}, {5, "V"}, {4, "IV"}, {1, "I"}};
+
+    string res;
+
+    for (const auto &[value, symbol] : valueSymbols)
+    {
+        if (num == 0)
+            break;
+
+        while (num >= value)
+        {
+            res += symbol;
+            num -= value;
+        }
+    }
+
+    return res;
 }
 
 int main()
