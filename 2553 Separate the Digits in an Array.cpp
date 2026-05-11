@@ -26,6 +26,87 @@ vector<int> separateDigits(vector<int> &nums)
     return res;
 }
 
+// Solution using stack data structure
+vector<int> separateDigits1(vector<int> &nums)
+{
+    stack<int> st;
+    vector<int> a;
+    for (int i = 0; i < nums.size(); i++)
+    {
+        int r = 0, t = nums[i];
+        while (t > 0)
+        {
+            r = t % 10;
+            st.push(r);
+            t = t / 10;
+        }
+        while (!st.empty())
+        {
+            a.push_back(st.top());
+            st.pop();
+        }
+    }
+    return a;
+}
+
+// solution using making int to string
+vector<int> separateDigits2(vector<int> &nums)
+{
+    vector<int> a;
+    for (int i = 0; i < nums.size(); i++)
+    {
+        string al = to_string(nums[i]);
+        for (char j : al)
+        {
+            a.push_back(j - '0');
+        }
+    }
+    return a;
+}
+
+// iterating from last
+vector<int> separateDigits3(vector<int> &nums)
+{
+    vector<int> res;
+    stack<int> st;
+
+    for (int i = nums.size() - 1; i >= 0; i--)
+    {
+        int num = nums[i];
+        while (num != 0)
+        {
+            int dig = num % 10;
+            st.push(dig);
+            num /= 10;
+        }
+    }
+
+    while (!st.empty())
+    {
+        res.push_back(st.top());
+        st.pop();
+    }
+
+    return res;
+}
+
+// Most efficient
+vector<int> separateDigits4(vector<int> &nums)
+{
+    vector<int> ans;
+
+    for (auto &it : nums)
+    {
+
+        string tmp = to_string(it);
+
+        for (auto &s : tmp)
+            ans.push_back(s - '0');
+    }
+
+    return ans;
+}
+
 void soln()
 {
     vector<vector<int>> testSet{
