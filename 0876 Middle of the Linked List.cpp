@@ -32,6 +32,20 @@ ListNode *middleNode(ListNode *head)
     return s->next;
 }
 
+ListNode *middleNode1(ListNode *head)
+{
+    ListNode *slow = head;
+    ListNode *fast = head;
+
+    while (fast && fast->next)
+    {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+
+    return slow;
+}
+
 ListNode *insertAtEnd(ListNode *head, int x)
 {
     ListNode *newNode = new ListNode(x);
